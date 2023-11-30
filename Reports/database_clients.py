@@ -1,37 +1,21 @@
-from Reports.database_services import Service
+from Reports.database_adapters import SQLAdapter, NoSQLAdapter
 
 
 class SQLClient:
-    adapted: Service
-    def __init__(self):
-        ...
+    SQLSession: SQLAdapter = SQLAdapter()
 
-    def connect(self):
-        ...
+    def get_report(self, id):
+        self.SQLSession.get(id)
 
-    def get_session(self):
-        ...
+    def insert_report(self, data):
+        self.SQLSession.insert(data)
 
-    def get_report(self):
-        ...
-
-    def insert_report(self):
-        ...
-
-    def update_report(self):
-        ...
+    def update_report(self, id, data):
+        self.SQLSession.update(id, data)
 
 
 class NoSQLClient:
-    adapted: Service
-    def __init__(self):
-        ...
-
-    def connect(self):
-        ...
-
-    def get_session(self):
-        ...
+    NoSQLSession: NoSQLAdapter = NoSQLAdapter()
 
     def get_form_metadata(self):
-        ...
+        return self.NoSQLSession.get()

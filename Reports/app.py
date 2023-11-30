@@ -1,25 +1,36 @@
 import uvicorn
 from fastapi import FastAPI, APIRouter
 
+from Reports.database_clients import SQLClient, NoSQLClient
+
 
 class Application:
+    relational_client: SQLClient = SQLClient()
+    no_relational_client: NoSQLClient = NoSQLClient()
 
     def __init__(self):
         self.microservice: FastAPI = FastAPI()
         self.router: APIRouter = APIRouter()
-        self.router.add_api_route("/notify", self.notify, methods=["POST"])
+        self.router.add_api_route("/get_report", self.get_report, methods=["GET"])
         self.router.add_api_route("/insert_report", self.insert_report, methods=["POST"])
         self.router.add_api_route("/get_form_metadata", self.get_form_metadata, methods=["GET"])
         self.microservice.include_router(self.router)
 
-    def notify(self):
-        return {"message": "Hello, World! uwu"}
+    def get_report(self):
+        return self.relational_client.get_report("123456789")
 
     def insert_report(self):
-        return {"message": "Hello, World! uwu"}
+        return self.relational_client.insert_report(
+            {
+                "id": "123456789",
+                "name": "test",
+                "age": 20,
+                "city": "New York"
+            }
+        )
 
     def get_form_metadata(self):
-        return {"message": "Hello, World! uwu"}
+        return self.no_relational_client.get_form_metadata()
 
 
 app: FastAPI = Application().microservice
