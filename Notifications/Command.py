@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
+from cryptography.fernet import Fernet
+
 class Command(ABC):
-    def __init__(self):
-        pass
+    
 
     @abstractmethod
-    def execute(self):
+    def execute(self, event, f: Fernet):
         pass

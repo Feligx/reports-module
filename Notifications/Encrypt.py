@@ -1,13 +1,16 @@
-from Notifications.Command import Command
-
+from Command import Command
+from cryptography.fernet import Fernet
 
 class Encrypt(Command):
     def __init__(self):
-        event: Event = None
-        pass
+        event = None
+        
 
-    def en(self, event):
-        pass
+    def en(self, f: Fernet):
+        print("Encrypting...")
+        return f.encrypt(self.event.encode())
 
-    def execute(self):
-        pass
+    def execute(self, event, f: Fernet):
+        self.event = event
+        return self.en(f)
+        
