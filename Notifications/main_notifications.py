@@ -11,7 +11,7 @@ def main():
     content.content_id = "456"
     content.info = {"hello": "world"}
     content.created_at = datetime.now()
-    content.status = "10"
+    content.status = "Pending"
 
     a = content.content_to_string()
     print(a)
