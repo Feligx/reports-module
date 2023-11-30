@@ -1,9 +1,14 @@
-from Notifications.Command import Command
+from Command import Command
+from cryptography.fernet import Fernet
 
 
-class Invoker(Command):
+class Invoker:
+
     def __init__(self):
-        command: Command = None
+        self.key = Fernet.generate_key()
+        self.f = Fernet(self.key)
+        
 
-    def execute(self):
-        pass
+    def invoke(self, command: Command, event):
+        return command.execute(event, self.f)
+        
