@@ -1,14 +1,9 @@
-from Invoker import Invoker
-from Content import Content
-from EventListener import EventListener
-from Decrypt import Decrypt
-from Encrypt import Encrypt
-import base64
-
-
 import socketio
-import time
 import json
+
+from Notifications.Content import Content
+from Notifications.Encrypt import Encrypt
+from Notifications.Invoker import Invoker
 
 # Create a Socket.IO client instance
 sio = socketio.Client()
@@ -36,7 +31,7 @@ def send_report(data):
 class EventHandler:
     def __init__(self,contentjson): 
         self.contentjson = contentjson
-        self.mensaje = contentjson["info"]
+        self.mensaje = contentjson["description"]
         self.user_id = contentjson["user_id"] 
 
 
@@ -55,7 +50,7 @@ class EventHandler:
         print(en)
 
         diccionario = {"user_id":self.user_id,"content_en":en}
-        print("Contento encriptado: ",diccionario,"user_id: ",self.user_id)
+        print("Contento cifrado: ",diccionario,"user_id: ",self.user_id)
 
         connect()
         

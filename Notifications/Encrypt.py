@@ -1,5 +1,8 @@
-from Command import Command
+
 from cryptography.fernet import Fernet
+
+from Notifications.Command import Command
+
 
 class Encrypt(Command):
     def __init__(self):

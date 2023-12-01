@@ -1,5 +1,6 @@
-from Command import Command
 from cryptography.fernet import Fernet
+
+from Notifications.Command import Command
 
 
 class Invoker:
