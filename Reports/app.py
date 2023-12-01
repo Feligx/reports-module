@@ -11,6 +11,7 @@ from Reports.database_clients import SQLClient, NoSQLClient
 
 basicConfig(level=INFO)
 
+
 class Application:
     relational_client: SQLClient = SQLClient()
     no_relational_client: NoSQLClient = NoSQLClient()

@@ -4,7 +4,7 @@ from Reports.database_adapters import SQLAdapter, NoSQLAdapter
 class SQLClient:
     SQLSession: SQLAdapter = SQLAdapter()
 
-    def get_report(self, id):
+    def get_report(self, id) -> dict:
         return self.SQLSession.get(id)
 
     def insert_report(self, data):
