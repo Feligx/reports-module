@@ -3,9 +3,13 @@ from Encrypt import Encrypt
 from Decrypt import Decrypt
 from Content import Content
 from datetime import datetime
-
+from EventHandler import EventHandler
 
 def main():
+    invoker = Invoker()
+    encrypt = Encrypt()
+    decrypt = Decrypt()
+
     content = Content()
     content.user_id = "123"
     content.content_id = "456"
@@ -13,19 +17,9 @@ def main():
     content.created_at = datetime.now()
     content.status = "Pending"
 
-    a = content.content_to_string()
-    print(a)
-    invoker = Invoker()
-    encrypt = Encrypt()
-    decrypt = Decrypt()
-
-    
-
-    en = invoker.invoke(encrypt, a)
-    print(en)
-
-    de = invoker.invoke(decrypt, en)
-    print(de)
+    #eventHandler recibe decifrado en JSON
+    eventHandler = EventHandler(content.content_to_json())
+    eventHandler.update_WS()
 
 if __name__ == "__main__":
     main()

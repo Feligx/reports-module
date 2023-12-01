@@ -1,7 +1,11 @@
 from EventListener import EventListener
+import smtplib
+from email.mime.text import MIMEText
 
 
-class SMTPListener(EventListener):
+
+
+class SMTPListener(EventListener):#message lo obtenemos del EventListener
     def __init__(self):
         pass
 
