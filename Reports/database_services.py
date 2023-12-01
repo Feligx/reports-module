@@ -19,7 +19,6 @@ offline_engine = create_engine('sqlite:///' + DB_PATH)
 offline_session = scoped_session(sessionmaker(autocommit=False,
                                               autoflush=False,
                                               bind=offline_engine))
-OfflineBase.metadata.create_all(bind=offline_engine)
 
 
 class Service:
@@ -39,6 +38,7 @@ class Service:
 class SQLiteService(Service):
     def __init__(self):
         super().__init__()
+        models.OfflineBase.metadata.create_all(bind=offline_engine)
 
     def insert(self, data):
         with offline_session as s:

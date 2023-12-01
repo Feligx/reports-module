@@ -1,3 +1,5 @@
+import json
+
 import uvicorn
 from fastapi import FastAPI, APIRouter
 
@@ -14,6 +16,9 @@ class Application:
         self.router.add_api_route("/get_report", self.get_report, methods=["GET"])
         self.router.add_api_route("/insert_report", self.insert_report, methods=["POST"])
         self.router.add_api_route("/get_form_metadata", self.get_form_metadata, methods=["GET"])
+        self.router.add_api_route("/get_content_status/{id}", self.get_content_status, methods=["GET"])
+        self.router.add_api_route("/set_content_status/{id}", self.set_content_status, methods=["POST"])
+        self.router.add_api_route("/get_content_url/{id}", self.get_content_url, methods=["GET"])
         self.microservice.include_router(self.router)
 
     def get_report(self):
@@ -31,6 +36,23 @@ class Application:
 
     def get_form_metadata(self):
         return self.no_relational_client.get_form_metadata()
+
+    def get_content_status(self, id):
+        with open("content_status.json", "r") as f:
+            json_data = json.loads(f.read())
+            return json_data[id]
+
+    def set_content_status(self, id, status):
+        with open("content_status.json", "r") as f:
+            json_data = json.loads(f.read())
+            json_data[id] = status
+            with open("content_status.json", "w") as f_edit:
+                f_edit.write(json.dumps(json_data))
+
+    def get_content_url(self, id):
+        with open("content_url.json", "r") as f:
+            json_data = json.loads(f.read())
+            return json_data[id]
 
 
 app: FastAPI = Application().microservice
