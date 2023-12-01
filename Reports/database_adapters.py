@@ -1,5 +1,4 @@
-from Reports.database_clients import SQLClient, NoSQLClient
-from Reports.database_services import Service
+from Reports.database_services import Service, MongoService, SQLiteService
 
 
 class Adapter:
@@ -15,7 +14,8 @@ class Adapter:
         ...
 
 
-class SQLAdapter(SQLClient, Adapter):
+class SQLAdapter(Adapter):
+    adapted = SQLiteService()
 
     def insert(self, data):
         return self.adapted.insert(data)
@@ -27,7 +27,10 @@ class SQLAdapter(SQLClient, Adapter):
         return self.adapted.get(id)
 
 
-class NoSQLAdapter(NoSQLClient, Adapter):
+
+class NoSQLAdapter(Adapter):
+
+    adapted = MongoService()
 
     def insert(self, data):
         return self.adapted.insert(

@@ -1,0 +1,20 @@
+{
+  "title": "The Big Combo",
+  "description": "A police lt. is ordered to stop investigating deadly crime boss Mr. Brown, because he hasn't been able to get any hard evidence against him. He then goes after Brown's girlfriend who despises him, for information instead.",
+  "fields": [
+    {
+      "name": "field1",
+      "type": "text"
+    },
+    {
+      "name": "field2",
+      "type": "text"
+    },
+    {
+      "name": "field3",
+      "type": "number"
+    }
+  ],
+  "created_at": "2015-09-20T09:55:00.000Z",
+  "updated_at": "2015-09-20T09:55:00.000Z"
+}

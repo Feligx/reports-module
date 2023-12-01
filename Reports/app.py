@@ -35,23 +35,24 @@ class Application:
         )
 
     def get_form_metadata(self):
-        return self.no_relational_client.get_form_metadata()
+        val = self.no_relational_client.get_form_metadata()
+        return val
 
     def get_content_status(self, id):
         with open("content_status.json", "r") as f:
-            json_data = json.loads(f.read())
+            json_data = json.load(f)
             return json_data[id]
 
     def set_content_status(self, id, status):
         with open("content_status.json", "r") as f:
-            json_data = json.loads(f.read())
+            json_data = json.load(f)
             json_data[id] = status
             with open("content_status.json", "w") as f_edit:
                 f_edit.write(json.dumps(json_data))
 
     def get_content_url(self, id):
         with open("content_url.json", "r") as f:
-            json_data = json.loads(f.read())
+            json_data = json.load(f)
             return json_data[id]
 
 
