@@ -5,13 +5,21 @@ class SQLClient:
     SQLSession: SQLAdapter = SQLAdapter()
 
     def get_report(self, id):
-        self.SQLSession.get(id)
+        return self.SQLSession.get(id)
 
     def insert_report(self, data):
-        self.SQLSession.insert(data)
+        try:
+            self.SQLSession.insert(data)
+            return True
+        except Exception as e:
+            return False
 
     def update_report(self, id, data):
-        self.SQLSession.update(id, data)
+        try:
+            self.SQLSession.update(id, data)
+            return True
+        except Exception as e:
+            return False
 
 
 class NoSQLClient:

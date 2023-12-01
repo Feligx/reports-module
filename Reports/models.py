@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from pydantic import BaseModel, Field
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String
 
 # from Reports.database_services import OfflineBase
 
@@ -40,14 +40,19 @@ def get_offline_db_session():
     finally:
         offline_session.remove()
 
+
 class Report(OfflineBase):
     __tablename__ = "reports"
-    __absract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(50))
     description = Column(String(200))
-    created_at = Column(DateTime, default=datetime.utcnow())
-    updated_at = Column(DateTime, default=datetime.utcnow())
+    created_at = Column(String, default=datetime.utcnow())
+    updated_at = Column(String, default=datetime.utcnow())
+    user_id = Column(Integer, nullable=True)
+    content_id = Column(Integer, nullable=True)
+    status = Column(String(30), nullable=True)
 
 
+print("Creating database...")
 OfflineBase.metadata.create_all(bind=offline_engine)
+print("Created database!")

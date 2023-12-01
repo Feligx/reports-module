@@ -23,18 +23,17 @@ class SQLiteService(Service):
 
     def insert(self, data):
         with get_offline_db_session() as s:
-            s.add(data)
+            s.add(models.Report(**data))
             s.commit()
 
     def update(self, id, data):
         with get_offline_db_session() as s:
             s.query(models.Report).filter(models.Report.id == id).update(data)
             s.commit()
-
     def get(self, id):
         with get_offline_db_session() as s:
-            print(s.query(models.Report).first())
-            return s.query(models.Report).first()
+            result = s.query(models.Report).filter(models.Report.id == id).first()
+            return result
 
 
 class MongoService(Service):
