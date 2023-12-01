@@ -1,7 +1,6 @@
 from EventListener import EventListener
-import smtplib
 from email.mime.text import MIMEText
-
+from time import sleep
 
 
 
@@ -11,3 +10,8 @@ class SMTPListener(EventListener):#message lo obtenemos del EventListener
 
     def update(self):
         pass
+
+    def enviar_correo(self, mensaje):
+        print("Enviando correo: ", mensaje)
+        sleep(1)
+        print("Correo enviado")
